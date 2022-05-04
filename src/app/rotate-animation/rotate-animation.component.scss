@@ -1,0 +1,100 @@
+:host {
+    margin-right: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.img-container {
+    position: absolute;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 10rem;
+    z-index: 1;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #d3d3d3;
+    }
+
+    img {
+        height: 50px;
+    }
+}
+
+ul {
+    $container-size: 10rem;
+
+    display: block;
+    border-radius: 50%;
+    position: relative;
+    width: $container-size;
+    height: $container-size;
+    border: solid 1px black;
+    padding: 0;
+    list-style: none;
+    animation: rotate 60s linear infinite normal forwards;
+
+    &:hover {
+        animation-play-state: paused;
+
+        > li > img {
+            animation-play-state: paused;
+        }
+    }
+    
+    > li {
+        $items: 6;
+        $offset: calc($container-size / $items);
+        $circle-size: 8rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: $circle-size;
+        height: $circle-size;
+        border: solid 1px black;
+        margin: -(calc($circle-size / 2));
+        border-radius: 50%;
+
+        $angle: calc(360 / $items);
+        $translate: $container-size*2;
+        $rotate: 0;
+
+        @for $i from 1 through $items {
+            &:nth-of-type(#{$i}) {
+                transform: rotate($rotate * 1deg) translate(calc($translate/2)) rotate($rotate * -1deg);
+            }
+
+            $rotate: $rotate+$angle;
+        }
+
+        img {
+            height: 50px;
+            animation: rotate 60s linear infinite reverse forwards;
+        }
+
+        &:hover {
+            background-color: #d3d3d3;
+            cursor: pointer;
+        }
+    }
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
