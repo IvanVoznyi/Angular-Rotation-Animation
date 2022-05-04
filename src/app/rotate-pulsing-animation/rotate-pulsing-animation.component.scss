@@ -88,13 +88,6 @@ ul {
     }
 }
 
-@function randomNum($min, $max) {
-    $rand: random();
-    $randomNum: $min + floor($rand * (($max - $min) + 1));
-  
-    @return $randomNum;
-  }
-
 @for $i from 1 through 6 {
     li:nth-child(#{$i})>div {
         display: flex;
